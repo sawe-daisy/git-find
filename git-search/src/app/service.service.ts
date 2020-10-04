@@ -69,7 +69,7 @@ export class ServiceService {
       name: any;
       description: any;
       language: any;
-      get_url: any;
+      git_url: any;
     }
     let promise = new Promise((resolve, reject) => {
       this.http
