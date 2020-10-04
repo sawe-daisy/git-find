@@ -1,9 +1,14 @@
-<div>
-  <div class="row">
-    <div class="col mt-2 ml-6"><input class="form-control" name="search" #searchTerm placeholder="search here">
-    </div>
-    <div class="col ml-0"><button type="button" class="btn btn-secondary"
-        (click)="performSearch(searchTerm)">Search</button></div>
-
+<app-search (searchUser)="performSearch($event)"></app-search>
+<div class="row m-2">
+  <div class="col-md-12">
+    <h4>{{user.login}}</h4>
+  <div>
+    <img src="{{ user.avatar_url}}" alt="{{user.login">
   </div>
+  <div>{{ user.public_repos }}</div>
+  <div>{{user.email}}</div>
+  <div>{{user.bio}}</div>
+  <div>followers:{{user.followers}} following: {{user.following}}</div>
+  </div>
+
 </div>
