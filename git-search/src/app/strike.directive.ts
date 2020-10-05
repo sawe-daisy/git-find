@@ -12,10 +12,10 @@ export class StrikeDirective {
       this.elem.nativeElement, 'backgroundColor', color
     );
   }
-  @HostListener('mouseenter') onMouseEnter(){
+  @HostListener('mouseenter') onMouseIn(){
     this.setColor('blue');
   }
-  @HostListener('mouseleave') onMouseLeave(){
+  @HostListener('mouseleave') onMouseLeft(){
     this.setColor('white');
   }
 
