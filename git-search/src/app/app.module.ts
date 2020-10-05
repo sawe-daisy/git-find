@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { StrikeDirective } from './strike.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SearchComponent,
     AboutComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    StrikeDirective
   ],
   imports: [
     BrowserModule,

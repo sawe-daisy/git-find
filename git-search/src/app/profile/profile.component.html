@@ -26,10 +26,8 @@
             {{serviceService.user.login}} Repositories
           </a>
           <ul *ngFor='let repo of serviceService.repositories ; let i = index' class="list-group">
-            <li>
-            </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              <a target="_blank" href="{{serviceService.repositories[i].html_url}}">
+              <a target="_blank" href="{{serviceService.repositories[i].html_url}}"  appStrike >
                 {{i+1}}.{{serviceService.repositories[i].name}}
               </a>
               <!-- <p>{{serviceService.repositories[i].description }}</p> -->
