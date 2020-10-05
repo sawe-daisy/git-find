@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from './user';
 import { Repo } from './repo';
+import { resolve, reject } from '../../node_modules/@types/q';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class ServiceService {
   repo: Repo;
 
   id = environment.gitApi;
+  repositories;
   private username: string;
   private client_id = '2c31944ff336b7283f4a';
   private client_secret = 'd8e6f45409de394ef11ef2ffe43d31f417085177';
@@ -22,77 +24,131 @@ export class ServiceService {
   }
 
   getProfileInfo(term: string): any {
-    interface ApiResponse {
-      login: string;
-      avatar_url: string;
-      public_repos: string;
+    interface expected {
+      login: any;
+      avatar_url: any;
+      public_repos: any;
       following: number;
       followers: number;
-      email: string;
-      bio: string;
+      email: any;
+      bio: any;
     }
 
-    let promise = new Promise((resolve, reject) => {
-      this.http
-        .get<ApiResponse>(
-          'https://api.github.com/users/' +
-            term +
-            '?client_id=' +
-            this.client_id +
-            '&client_secret' +
-            this.client_secret
-        )
-        .toPromise()
-        .then(
-          (response) => {
-            //console.log(response);
-            // this.user.username = response.username;
-            // this.user.imgPath = response.imgPath;
-            // this.user.repoUrl = response.repoUrl;
-            // this.user.following = response.following;
-            // this.user.followers = response.followers;
-            // this.user.email = response.email;
-            // this.user.bio = response.bio;
-            this.user = response;
 
-            resolve();
-          },
-          (error) => {
-            reject(error);
-          }
-        );
+    let promise = new Promise((resolve, reject) => {
+    this.http.get<expected>('https://api.github.com/users/' + term +
+    '?client_id=' + this.client_id +
+    '&client_secret' + this.client_secret).toPromise().then(res => {
+      this.user = new User(
+        res.login,
+        res.avatar_url,
+        res.public_repos,
+        res.following,
+        res.followers,
+        res.email,
+        res.bio
+      );
+      console.log(res);
+
+      resolve();
+    },
+
+    error => {
+      console.log(error);
     });
-    return promise;
-  }
+  });
+  return promise;
+}
   getRepoInfo(term: string): any{
-    interface ApiResponse{
+    interface expected{
       name: any;
       description: any;
-      language: any;
+      language: string;
       git_url: any;
-    }
-    let promise = new Promise((resolve, reject) => {
-      this.http
-        .get<ApiResponse>(
-          'https://api.github.com/users/' +
-            term +
-            '?client_id=' +
-            this.client_id +
-            '&client_secret' +
-            this.client_secret
-        )
-        .toPromise()
-        .then(
-          (response) => {
-            this.repo = response;
 
-            resolve();
-          },
-          (error) => {
-            reject(error);
-          }
-        );
+    }
+
+    let promise = new Promise((resolve, reject) => {
+      this.http.get('https://api.github.com/users/' + term +
+      '?client_id=' + this.client_id +
+      '&client_secret' + this.client_secret).toPromise().then(res => {
+        this.repositories = res;
+        console.log(this.repositories);
+
+        resolve();
+
+      },
+      error => {
+        console.log(error);
+      }
+      );
     });
+
     return promise;
   }
+
+  //   let promise = new Promise((resolve, reject) => {
+  //     this.http
+  //       .get<ApiResponse>(
+  //         'https://api.github.com/users/' +
+  //           term +
+  //           '?client_id=' +
+  //           this.client_id +
+  //           '&client_secret' +
+  //           this.client_secret
+  //       )
+  //       .toPromise()
+  //       .then(
+  //         (response) => {
+  //           //console.log(response);
+  //           // this.user.username = response.username;
+  //           // this.user.imgPath = response.imgPath;
+  //           // this.user.repoUrl = response.repoUrl;
+  //           // this.user.following = response.following;
+  //           // this.user.followers = response.followers;
+  //           // this.user.email = response.email;
+  //           // this.user.bio = response.bio;
+  //           this.user = response;
+
+  //           resolve();
+  //         },
+  //         (error) => {
+  //           reject(error);
+  //         }
+  //       );
+  //   });
+  //   return promise;
+  // }
+  // getRepoInfo(term: string): any{
+  //   interface ApiResponse{
+  //     name: any;
+  //     description: any;
+  //     language: any;
+  //     gt_url: any;
+  //   }
+  //   let promise = new Promise((resolve, reject) => {
+  //     this.http
+  //       .get<ApiResponse>(
+  //         'https://api.github.com/users/' +
+  //           term +
+  //           '?client_id=' +
+  //           this.client_id +
+  //           '&client_secret' +
+  //           this.client_secret
+  //       )
+  //       .toPromise()
+  //       .then(
+  //         (response) => {
+  //           this.repo = response;
+
+  //           resolve();
+  //         },
+  //         (error) => {
+  //           reject(error);
+  //         }
+  //       );
+  //   });
+  //   return promise;
+  // }
+
   }

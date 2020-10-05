@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { User } from '../user';
 import { HttpClient } from '@angular/common/http';
+import { Repo } from '../repo';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 export class ProfileComponent implements OnInit {
   user: User;
   users = [];
+  repo: Repo;
+  repos = [];
 
   constructor(private serviceService: ServiceService, http: HttpClient) {}
 
@@ -25,7 +28,8 @@ export class ProfileComponent implements OnInit {
     );
     this.serviceService.getRepoInfo(searchTerm).then(
       (result) => {
-        this.user = this.serviceService.user;
+        this.repo = this.serviceService.repo;
+        this.repos.push(this.repo);
       },
       (error) => {
         console.log(error);
