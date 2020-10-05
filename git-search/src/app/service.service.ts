@@ -19,7 +19,7 @@ export class ServiceService {
   private client_secret = 'd8e6f45409de394ef11ef2ffe43d31f417085177';
 
   constructor(private http: HttpClient) {
-    this.user = new User('', '', '', 0, 0, '', '');
+    this.user = new User('', '', '', 0, 0, '', '', new Date);
     this.repo = new Repo('', '', '', '');
   }
 
@@ -32,6 +32,7 @@ export class ServiceService {
       followers: number;
       email: any;
       bio: any;
+      created_at: Date;
     }
 
 
@@ -46,9 +47,9 @@ export class ServiceService {
         res.following,
         res.followers,
         res.email,
-        res.bio
+        res.bio,
+        res.created_at
       );
-      // console.log(res);
 
       resolve();
     },

@@ -1,7 +1,13 @@
 # Autrhor
 Daisy jesang
 
+# figma design
+
+'https://www.figma.com/file/gRdAqaPd7KkIkrCn7syoMS/Gitsearch?node-id=0%3A1'
+
 # GitSearch
+
+Angilar app where you can search Github users and repositories.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.1.
 

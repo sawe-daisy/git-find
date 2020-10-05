@@ -6,6 +6,7 @@ export class User {
     public following: number,
     public followers: number,
     public email: any,
-    public bio: any
+    public bio: any,
+    public created_at: Date
   ) {}
 }
