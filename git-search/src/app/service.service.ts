@@ -48,7 +48,7 @@ export class ServiceService {
         res.email,
         res.bio
       );
-      console.log(res);
+      // console.log(res);
 
       resolve();
     },

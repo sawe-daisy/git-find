@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   constructor(private serviceService: ServiceService, http: HttpClient) {}
 
   performSearch(searchTerm): any {
+
     this.serviceService.getProfileInfo(searchTerm).then(
       (result) => {
         this.user = this.serviceService.user;

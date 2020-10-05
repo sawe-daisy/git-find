@@ -1,9 +1,9 @@
 <app-search (searchUser)="performSearch($event)"></app-search>
 <div class="row m-2">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <h4>{{user.login}}</h4>
   <div>
-    <img src="{{ user.avatar_url}}" alt="{{user.login">
+    <img src="{{ user.avatar_url}}" alt="{{user.login}}">
   </div>
   <div>{{ user.public_repos }}</div>
   <div>{{user.email}}</div>
