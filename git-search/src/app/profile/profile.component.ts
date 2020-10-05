@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   repo: Repo;
   repos = [];
 
-  constructor(private serviceService: ServiceService, http: HttpClient) {}
+  constructor(public serviceService: ServiceService, http: HttpClient) {}
 
   performSearch(searchTerm): any {
 
