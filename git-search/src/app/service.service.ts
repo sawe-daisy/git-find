@@ -64,12 +64,12 @@ export class ServiceService {
       name: any;
       description: any;
       language: string;
-      git_url: any;
+      repos_url: any;
 
     }
 
     let promise = new Promise((resolve, reject) => {
-      this.http.get('https://api.github.com/users/' + term +
+      this.http.get('https://api.github.com/users/' + term + '/repos' +
       '?client_id=' + this.client_id +
       '&client_secret' + this.client_secret).toPromise().then(res => {
         this.repositories = res;
